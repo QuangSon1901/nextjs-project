@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Brand {
+  id      Int       @id @default(autoincrement())
+  name    String    @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  deleted   Boolean  @default(false)
+  Product Product[]
+}
+
+model Category {
+  id      Int       @id @default(autoincrement())
+  name    String    @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  deleted   Boolean  @default(false)
+  Product Product[]
+}
+
+model Product {
+  id          Int       @id @default(autoincrement())
+  title       String    @db.VarChar(255)
+  description String?
+  price       Decimal?
+  Brand       Brand     @relation(fields: [brandID], references: [id])
+  brandID     Int
+  Category    Category  @relation(fields: [categoryID], references: [id])
+  categoryID  Int
+  content     String?   @db.Text
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now())
+  deleted     Boolean   @default(false)
+
+  @@fulltext([description])
+  @@fulltext([description, title])
+}
+
+enum Role {
+  CUSTOMER
+  MANAGER
+  ADMIN
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String?
+  image     String?
+  name      String
+  role      Role     @default(CUSTOMER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  deleted   Boolean  @default(false)
+}
