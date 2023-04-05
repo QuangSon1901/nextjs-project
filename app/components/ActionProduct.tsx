@@ -3,11 +3,16 @@ import React from 'react';
 import { Formik } from 'formik';
 import { addProducts, editProducts } from './Products';
 import * as Yup from 'yup';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Brand, Category } from '@prisma/client';
 import MdEditor from 'react-markdown-editor-lite';
 import { toast } from 'react-hot-toast';
 import MarkdownIt from 'markdown-it';
+import FsEditor from '@/plugin/FsEditor';
+// import FsEditor from '@/plugin/FsEditor';
+
+MdEditor.use(FsEditor);
+
 export const getBrands = async () => {
     const res = await fetch(`/api/brands`);
 
@@ -20,7 +25,6 @@ export const getBrands = async () => {
 
 export const getCategorys = async () => {
     const res = await fetch(`/api/categories`);
-    console.log(res);
 
     if (!res.ok) {
         throw new Error('Failed to fetch data');
@@ -164,11 +168,11 @@ const ActionProduct = ({ close, product, setProducts }: { close: any; product: a
                                             Brand :
                                         </div>
                                         <select
-                                            name="brand"
+                                            name="brandID"
                                             value={values.brandID}
                                             onChange={handleChange}
                                             className={`w-[300px] h-10 px-4 outline-none border border-borderColor rounded-md ${
-                                                errors.brand && touched.brand ? 'border-red-500' : ''
+                                                errors.brandID && touched.brandID ? 'border-red-500' : ''
                                             }`}
                                         >
                                             <option value="0" label="Select a brand">
@@ -182,8 +186,8 @@ const ActionProduct = ({ close, product, setProducts }: { close: any; product: a
                                                     </option>
                                                 ))}
                                         </select>
-                                        {errors.brand && touched.brand && (
-                                            <div className="text-red-500">{errors.brand}</div>
+                                        {errors.brandID && touched.brandID && (
+                                            <div className="text-red-500">{errors.brandID}</div>
                                         )}
                                     </label>
                                     <label htmlFor="price">
@@ -213,11 +217,11 @@ const ActionProduct = ({ close, product, setProducts }: { close: any; product: a
                                             Category :
                                         </div>
                                         <select
-                                            name="category"
+                                            name="categoryID"
                                             onChange={handleChange}
                                             value={values.categoryID}
                                             className={`w-[300px] h-10 px-4 outline-none border border-borderColor rounded-md ${
-                                                errors.category && touched.category ? 'border-red-500' : ''
+                                                errors.categoryID && touched.categoryID ? 'border-red-500' : ''
                                             }`}
                                         >
                                             <option value="" label="Select a category">
@@ -231,8 +235,8 @@ const ActionProduct = ({ close, product, setProducts }: { close: any; product: a
                                                     </option>
                                                 ))}
                                         </select>
-                                        {errors.category && touched.category && (
-                                            <div className="text-red-500">{errors.category}</div>
+                                        {errors.categoryID && touched.categoryID && (
+                                            <div className="text-red-500">{errors.categoryID}</div>
                                         )}
                                     </label>
                                     <label htmlFor="description">

@@ -32,7 +32,7 @@ export const getProducts = async (skip: number, take: number) => {
     const res = await fetch(`/api/products?skip=${skip}&take=${take}`);
 
     if (!res.ok) {
-        console.log(res);
+        return;
     }
 
     return res.json();
