@@ -34,6 +34,7 @@ model Product {
   title       String    @db.VarChar(255)
   description String?
   price       Decimal?
+  image       String?
   Brand       Brand     @relation(fields: [brandID], references: [id])
   brandID     Int
   Category    Category  @relation(fields: [categoryID], references: [id])

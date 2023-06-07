@@ -4,35 +4,36 @@ const prisma = new PrismaClient();
 import bcrypt from 'bcryptjs';
 
 async function main() {
-    // let brandArr = [];
-    // for (let i = 0; i < 10; i++) {
-    //     let brand = await prisma.brand.create({
-    //         data: {
-    //             name: faker.company.name(),
-    //         },
-    //     });
-    //     brandArr.push(brand.id);
-    // }
-    // let cateArr = [];
-    // for (let i = 0; i < 10; i++) {
-    //     let category = await prisma.category.create({
-    //         data: {
-    //             name: faker.company.name(),
-    //         },
-    //     });
-    //     cateArr.push(category.id);
-    // }
-    // for (let i = 0; i < 100; i++) {
-    //     await prisma.product.create({
-    //         data: {
-    //             title: faker.commerce.productName(),
-    //             description: faker.commerce.productDescription(),
-    //             price: faker.commerce.price(100, 1000),
-    //             categoryID: faker.helpers.arrayElement(cateArr),
-    //             brandID: faker.helpers.arrayElement(brandArr),
-    //         },
-    //     });
-    // }
+    let brandArr = [];
+    for (let i = 0; i < 10; i++) {
+        let brand = await prisma.brand.create({
+            data: {
+                name: faker.company.name(),
+            },
+        });
+        brandArr.push(brand.id);
+    }
+    let cateArr = [];
+    for (let i = 0; i < 10; i++) {
+        let category = await prisma.category.create({
+            data: {
+                name: faker.company.name(),
+            },
+        });
+        cateArr.push(category.id);
+    }
+    for (let i = 0; i < 100; i++) {
+        await prisma.product.create({
+            data: {
+                title: faker.commerce.productName(),
+                description: faker.commerce.productDescription(),
+                price: faker.commerce.price(100, 1000),
+                categoryID: faker.helpers.arrayElement(cateArr),
+                brandID: faker.helpers.arrayElement(brandArr),
+                image: 'product.jpeg',
+            },
+        });
+    }
     // for (let i = 0; i < 10; i++) {
     //     await prisma.user.create({
     //         data: {

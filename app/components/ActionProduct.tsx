@@ -56,6 +56,8 @@ const ActionProduct = ({ close, product, setProducts }: { close: any; product: a
                     description: product ? product.description : '',
                 }}
                 onSubmit={(values) => {
+                    console.log(values);
+
                     if (product) {
                         const fetchEditProduct = async () => {
                             const res = await editProducts({
@@ -142,9 +144,9 @@ const ActionProduct = ({ close, product, setProducts }: { close: any; product: a
                             <div className="flex gap-8">
                                 <div className="flex flex-col gap-6 my-8">
                                     <label htmlFor="title">
-                                        <div className="relative w-max after:content-['*'] after:text-red-600 after:top-0 after:-right-3 after:font-bold after:absolute">
+                                        <span className="relative w-max after:content-['*'] after:text-red-600 after:top-0 after:-right-3 after:font-bold after:absolute">
                                             Title :
-                                        </div>
+                                        </span>
                                         <input
                                             id="title"
                                             type="text"
@@ -160,13 +162,13 @@ const ActionProduct = ({ close, product, setProducts }: { close: any; product: a
                                             }`}
                                         />
                                         {errors.title && touched.title && (
-                                            <div className="text-red-500">{errors.title}</div>
+                                            <span className="text-red-500">{errors.title}</span>
                                         )}
                                     </label>
                                     <label htmlFor="brand">
-                                        <div className="relative w-max after:content-['*'] after:text-red-600 after:top-0 after:-right-3 after:font-bold after:absolute">
+                                        <span className="relative w-max after:content-['*'] after:text-red-600 after:top-0 after:-right-3 after:font-bold after:absolute">
                                             Brand :
-                                        </div>
+                                        </span>
                                         <select
                                             name="brandID"
                                             value={values.brandID}
@@ -187,13 +189,13 @@ const ActionProduct = ({ close, product, setProducts }: { close: any; product: a
                                                 ))}
                                         </select>
                                         {errors.brandID && touched.brandID && (
-                                            <div className="text-red-500">{errors.brandID}</div>
+                                            <span className="text-red-500">{errors.brandID}</span>
                                         )}
                                     </label>
                                     <label htmlFor="price">
-                                        <div className="relative w-max after:content-['*'] after:text-red-600 after:top-0 after:-right-3 after:font-bold after:absolute">
+                                        <span className="relative w-max after:content-['*'] after:text-red-600 after:top-0 after:-right-3 after:font-bold after:absolute">
                                             Price :
-                                        </div>
+                                        </span>
                                         <input
                                             id="price"
                                             type="number"
@@ -209,13 +211,13 @@ const ActionProduct = ({ close, product, setProducts }: { close: any; product: a
                                             }`}
                                         />
                                         {errors.price && touched.price && (
-                                            <div className="text-red-500">{errors.price}</div>
+                                            <span className="text-red-500">{errors.price}</span>
                                         )}
                                     </label>
                                     <label htmlFor="category">
-                                        <div className="relative w-max after:content-['*'] after:text-red-600 after:top-0 after:-right-3 after:font-bold after:absolute">
+                                        <span className="relative w-max after:content-['*'] after:text-red-600 after:top-0 after:-right-3 after:font-bold after:absolute">
                                             Category :
-                                        </div>
+                                        </span>
                                         <select
                                             name="categoryID"
                                             onChange={handleChange}
@@ -236,13 +238,13 @@ const ActionProduct = ({ close, product, setProducts }: { close: any; product: a
                                                 ))}
                                         </select>
                                         {errors.categoryID && touched.categoryID && (
-                                            <div className="text-red-500">{errors.categoryID}</div>
+                                            <span className="text-red-500">{errors.categoryID}</span>
                                         )}
                                     </label>
                                     <label htmlFor="description">
-                                        <div className="relative w-max after:content-['*'] after:text-red-600 after:top-0 after:-right-3 after:font-bold after:absolute">
+                                        <span className="relative w-max after:content-['*'] after:text-red-600 after:top-0 after:-right-3 after:font-bold after:absolute">
                                             Description :
-                                        </div>
+                                        </span>
                                         <input
                                             id="description"
                                             type="text"
@@ -258,7 +260,7 @@ const ActionProduct = ({ close, product, setProducts }: { close: any; product: a
                                             }`}
                                         />
                                         {errors.description && touched.description && (
-                                            <div className="text-red-500">{errors.description}</div>
+                                            <span className="text-red-500">{errors.description}</span>
                                         )}
                                     </label>
                                     <button type="submit" className="bg-primary-600 rounded-md text-white py-2">
@@ -266,10 +268,10 @@ const ActionProduct = ({ close, product, setProducts }: { close: any; product: a
                                     </button>
                                 </div>
                                 <div className="flex flex-col gap-6 my-8">
-                                    <label htmlFor="content" className="h-full">
-                                        <div className="relative w-max after:content-['*'] after:text-red-600 after:top-0 after:-right-3 after:font-bold after:absolute">
+                                    <div className="h-full">
+                                        <span className="relative w-max after:content-['*'] after:text-red-600 after:top-0 after:-right-3 after:font-bold after:absolute">
                                             Content :
-                                        </div>
+                                        </span>
                                         <div className="flex gap-8 h-full">
                                             <MdEditor
                                                 className="w-[1000px] h-full max-h-[500px]  px-4 outline-none border border-borderColor rounded-md"
@@ -278,7 +280,7 @@ const ActionProduct = ({ close, product, setProducts }: { close: any; product: a
                                                 onChange={({ html, text }) => setFieldValue('content', text)}
                                             />
                                         </div>
-                                    </label>
+                                    </div>
                                 </div>
                             </div>
                         </form>

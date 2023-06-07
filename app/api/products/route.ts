@@ -18,6 +18,17 @@ export async function GET(request: Request) {
         });
         return NextResponse.json({ products: search, status: 200 }, { status: 200 });
     }
+
+    const pid: string | null = searchParams.get('pid');
+    if (pid) {
+        const search = await prisma.product.findUnique({
+            where: {
+                id: Number(pid),
+            },
+        });
+        return NextResponse.json({ product: search, status: 200 }, { status: 200 });
+    }
+
     const products = await prisma.product.findMany({
         include: {
             Brand: true,

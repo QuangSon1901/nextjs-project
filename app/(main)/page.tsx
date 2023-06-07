@@ -1,5 +1,6 @@
 import HomeLayout from '@/app/components/HomeLayout';
 import getCurrentUser from '@/libs/getCurrentUser';
+import Products from '../components/Customer/Products';
 
 export const metadata: { title: string } = {
     title: 'Dev IT',
@@ -10,7 +11,7 @@ export default async function Page() {
 
     return (
         <HomeLayout infoUser={user}>
-            <section className="px-10 mt-4 text-xl font-bold text-center">Welcome to Dev IT</section>;
+            <Products />
         </HomeLayout>
     );
 }
